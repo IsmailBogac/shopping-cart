@@ -1,24 +1,114 @@
-#products-container{
-    display: flex;
-    border-bottom: 2px solid #000;
+/* Genel reset ve font ayarları */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.product{
-    /* background-color: #F2E2B1; */
-    border: 2px solid #b5b3b3;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    margin: 10px;
-    padding: 20px;
+body {
+  background-color: #f9f9f9;
+  padding: 20px;
+  color: #333;
+}
+
+/* Başlık */
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Ürün ve sepet konteynerleri */
+#products-container,
+#bag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Ürün/sepet kartı */
+.product {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.product:hover {
+  transform: scale(1.02);
+}
+
+/* Ürün resimleri */
+.product img {
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Ürün adı */
+.product h2,
+.product h3 {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+}
+
+/* Fiyat */
+.price {
+  color: #27ae60;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Butonlar */
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Sil butonu için özel stil */
+.delete-btn {
+  background-color: #e74c3c;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Sepet sayfası: Delete All butonu */
+#delete-all {
+  display: block;
+  margin: 20px auto;
+  background-color: #e67e22;
+  
+}
+
+#delete-all:hover {
+  background-color: #d35400;
+}
+
+a{
+    background-color: #e67e22;
+    color: #ddd;
+    padding: 5px;
+    position: absolute;
+    margin-top: 10px;
     border-radius: 5px;
+    text-decoration: none;
 }
-img{
-    background-color: #fff;
-}
-.price{
-    color: orange;
-    border-bottom: 2px solid #000;
-}
-
-#bag-container{
-    display: flex;
+a:hover{
+    background-color: #d35400;
+    transition: 0.5s;
 }

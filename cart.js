@@ -29,11 +29,14 @@ function renderCart(){
 document.getElementById('total-price').textContent = total;
 }
         
-        document.getElementById('delete-all').addEventListener('click',() => {
-            localStorage.removeItem("bag");
-            renderCart();
-        })
-        renderCart();
+        window.onload = () => {
+  document.getElementById('delete-all').addEventListener('click', () => {
+    localStorage.removeItem("bag");
+    location.reload(); // Sayfayı yeniler
+  });
+
+  renderCart();
+};
 
     
     renderCart();

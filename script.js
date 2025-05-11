@@ -66,10 +66,10 @@ class bag {
 }
 
 
-let item1 = new products("Perfume", 100, "item1.png");
-let item2 = new products("jacket", 250, "jacket.jpg");
-let item3 = new products("Blender", 300, "blender.jpg");
-let item4 = new products("Book", 150, "book.png");
+let item1 = new products("Kadın parfüm", 100, "item1.png");
+let item2 = new products("Erkek kolej mont ", 250, "jacket.jpg");
+let item3 = new products("Blender seti", 300, "blender.jpg");
+let item4 = new products("Gece yarısı kütüphanesi", 150, "book.png");
 
 const list = new productList();
 const cart = new bag();
