@@ -1,9 +1,14 @@
+function generateId() {
+  // Örnek: zaman damgası + rastgele sayı
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
 class products {
-  constructor(id,name, price, imgUrl) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.imgUrl = imgUrl;
+  constructor(name, price,imgUrl) {
+      this.id = generateId()
+      this.name = name;
+      this.price = price;
+      this.imgUrl = imgUrl;
   }
   renderAll() {
     return `
@@ -11,7 +16,7 @@ class products {
             <img src = "${this.imgUrl}" alt="${this.name}" width = "150px" height="150px"  />
             <h2 class="name">${this.name}</h2>
             <p class="price">${this.price}</p>
-            <button  class="addToBag" data-id="${this.id}">Add To Bag</button>
+            <button  class="addToBag" data-id = "${this.id}">Add To Bag</button>
             </div>
         `;
   }
@@ -35,16 +40,36 @@ class bag {
   }
 
   addToBag(product) {
-    this.bagList.push(product);
+    const existingItem = this.bagList.find(item => item.id === product.id);
+    if(existingItem){
+        existingItem.quantity += 1;
+    }else{
+
+        const newItem = {
+            name: product.name,
+            price : product.price,
+            imgUrl : product.imgUrl,  
+            cartId:generateId(),
+            quantity:1,
+        }
+        this.bagList.push(newItem);
+    }
+    
     localStorage.setItem("bag", JSON.stringify(this.bagList));
-    console.log(product, "sepete eklendi.");
+  }
+
+  removeFromBag(index){
+    this.bagList.splice(index,1);
+    localStorage.setItem("bag",JSON.stringify(this.bagList));
+
   }
 }
 
-let item1 = new products(1,"Perfume", 100, "item1.png");
-let item2 = new products(2,"jacket", 250, "jacket.jpg");
-let item3 = new products(3,"Blender", 300, "blender.jpg");
-let item4 = new products(4,"Book", 150, "book.png");
+
+let item1 = new products("Perfume", 100, "item1.png");
+let item2 = new products("jacket", 250, "jacket.jpg");
+let item3 = new products("Blender", 300, "blender.jpg");
+let item4 = new products("Book", 150, "book.png");
 
 const list = new productList();
 const cart = new bag();
@@ -63,14 +88,19 @@ list.listArr.map((item) => {
 });
 
 const bagButton = document.querySelectorAll(".addToBag");
+const bagContainer = document.getElementById("bag-container");
+
+
+
 
 bagButton.forEach((btn) => {
   btn.addEventListener("click", (e) => {
-    const id =parseInt(e.target.dataset.id);
+    const id =e.target.dataset.id;
 
-    const selectedProduct = list.listArr.find((item) => {
-      return item.id == id;
-    });
+    const selectedProduct = list.listArr.find((item) => {return item.id === id});
     cart.addToBag(selectedProduct);
   });
 });
+
+
+
